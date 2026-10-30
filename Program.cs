@@ -47,83 +47,134 @@
 
 // part 4
 
-int[] bubbleNumbers = [5, 2, 8, 1, 4];
-int[] otherNumbers = [5, 2, 8, 1, 4];
-int[] standardNumbers = [5, 2, 8, 1, 4];
+// int[] bubbleNumbers = [5, 2, 8, 1, 4];
+// int[] otherNumbers = [5, 2, 8, 1, 4];
+// int[] standardNumbers = [5, 2, 8, 1, 4];
 
-BubbleSort(bubbleNumbers);
-SelectionSort(otherNumbers);
-Array.Sort(standardNumbers);
+// BubbleSort(bubbleNumbers);
+// SelectionSort(otherNumbers);
+// Array.Sort(standardNumbers);
 
-Console.WriteLine("BubbleSort: " + string.Join(", ", bubbleNumbers));
-Console.WriteLine("SelectionSort: " + string.Join(", ", otherNumbers));
-Console.WriteLine("Array.Sort: " + string.Join(", ", standardNumbers));
+// Console.WriteLine("BubbleSort: " + string.Join(", ", bubbleNumbers));
+// Console.WriteLine("SelectionSort: " + string.Join(", ", otherNumbers));
+// Console.WriteLine("Array.Sort: " + string.Join(", ", standardNumbers));
 
-List<int> values = [5, 2, 8, 1, 4];
+// List<int> values = [5, 2, 8, 1, 4];
 
-values.Sort();
+// values.Sort();
 
-Console.WriteLine("List.Sort: " + string.Join(", ", values));
+// Console.WriteLine("List.Sort: " + string.Join(", ", values));
 
-values.Reverse();
+// values.Reverse();
 
-Console.WriteLine("reverse " + string.Join(", ", values));
+// Console.WriteLine("reverse " + string.Join(", ", values));
 
 // чтобы понять принцип работы сортировочных алгоритмов
 
 
+// final task
+
+Console.Write("number of participants: ");
+
+if (!int.TryParse(Console.ReadLine(), out int participants) || participants <= 0)
+{
+    Console.WriteLine("invalid number");
+    return;
+}
+
+List<int> results = [];
+
+for (int i = 0; i < participants; i++)
+{
+    Console.Write($"result {i + 1}: ");
+
+    if (!int.TryParse(Console.ReadLine(), out int result))
+    {
+        Console.WriteLine("invalid input");
+        return;
+    }
+
+    results.Add(result);
+}
+
+List<int> sortedResults = new(results);
+
+sortedResults.Sort();
+
+Console.WriteLine("sorted results:");
+Console.WriteLine(string.Join(" ", sortedResults));
+
+Console.WriteLine("original results:");
+Console.WriteLine(string.Join(" ", results));
+
+Console.WriteLine($"best result: {sortedResults[sortedResults.Count - 1]}");
+Console.WriteLine($"worst result: {sortedResults[0]}");
+
+Console.WriteLine("top three results:");
+
+int start = sortedResults.Count - 3;
+
+if (start < 0)
+{
+    start = 0;
+}
+
+for (int i = sortedResults.Count - 1; i >= start; i--)
+{
+    Console.WriteLine(sortedResults[i]);
+}
 // sort
 
-void BubbleSort(int[] numbers)
-{
-    for (int i = 0; i < numbers.Length - 1; i++)
-    {
-        for (int j = 0; j < numbers.Length - 1 - i; j++)
-        {
-            if (numbers[j] > numbers[j + 1])
-            {
-                int temp = numbers[j];
-                numbers[j] = numbers[j + 1];
-                numbers[j + 1] = temp;
-            }
-        }
-    }
-}
+// void BubbleSort(int[] numbers)
+// {
+//     for (int i = 0; i < numbers.Length - 1; i++)
+//     {
+//         for (int j = 0; j < numbers.Length - 1 - i; j++)
+//         {
+//             if (numbers[j] > numbers[j + 1])
+//             {
+//                 int temp = numbers[j];
+//                 numbers[j] = numbers[j + 1];
+//                 numbers[j + 1] = temp;
+//             }
+//         }
+//     }
+// }
 
 
-void SelectionSort(int[] numbers)
-{
-    for (int i = 0; i < numbers.Length - 1; i++)
-    {
-        int minIndex = i;
+// void SelectionSort(int[] numbers)
+// {
+//     for (int i = 0; i < numbers.Length - 1; i++)
+//     {
+//         int minIndex = i;
 
-        for (int j = i + 1; j < numbers.Length; j++)
-        {
-            if (numbers[j] < numbers[minIndex])
-            {
-                minIndex = j;
-            }
-        }
+//         for (int j = i + 1; j < numbers.Length; j++)
+//         {
+//             if (numbers[j] < numbers[minIndex])
+//             {
+//                 minIndex = j;
+//             }
+//         }
 
-        int temp = numbers[i];
-        numbers[i] = numbers[minIndex];
-        numbers[minIndex] = temp;
-    }
-}
+//         int temp = numbers[i];
+//         numbers[i] = numbers[minIndex];
+//         numbers[minIndex] = temp;
+//     }
+// }
 
-void InsertionSort(int[] numbers)
-{
-    for (int i = 1; i < numbers.Length; i++)
-    {
-        int current = numbers[i];
-        int j = i - 1;
+// void InsertionSort(int[] numbers)
+// {
+//     for (int i = 1; i < numbers.Length; i++)
+//     {
+//         int current = numbers[i];
+//         int j = i - 1;
 
-        while (j >= 0 && numbers[j] > current)
-        {
-            numbers[j + 1] = numbers[j];
-            j--;
-        }
+//         while (j >= 0 && numbers[j] > current)
+//         {
+//             numbers[j + 1] = numbers[j];
+//             j--;
+//         }
 
-        numbers[j + 1] = current;
-    }
-}
+//         numbers[j + 1] = current;
+//     }
+// }
