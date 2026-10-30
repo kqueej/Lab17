@@ -74,55 +74,102 @@
 
 // final task
 
-Console.Write("number of participants: ");
+// Console.Write("number of participants: ");
 
-if (!int.TryParse(Console.ReadLine(), out int participants) || participants <= 0)
+// if (!int.TryParse(Console.ReadLine(), out int participants) || participants <= 0)
+// {
+//     Console.WriteLine("invalid number");
+//     return;
+// }
+
+// List<int> results = [];
+
+// for (int i = 0; i < participants; i++)
+// {
+//     Console.Write($"result {i + 1}: ");
+
+//     if (!int.TryParse(Console.ReadLine(), out int result))
+//     {
+//         Console.WriteLine("invalid input");
+//         return;
+//     }
+
+//     results.Add(result);
+// }
+
+// List<int> sortedResults = new(results);
+
+// sortedResults.Sort();
+
+// Console.WriteLine("sorted results:");
+// Console.WriteLine(string.Join(" ", sortedResults));
+
+// Console.WriteLine("original results:");
+// Console.WriteLine(string.Join(" ", results));
+
+// Console.WriteLine($"best result: {sortedResults[sortedResults.Count - 1]}");
+// Console.WriteLine($"worst result: {sortedResults[0]}");
+
+// Console.WriteLine("top three results:");
+
+// int start = sortedResults.Count - 3;
+
+// if (start < 0)
+// {
+//     start = 0;
+// }
+
+// for (int i = sortedResults.Count - 1; i >= start; i--)
+// {
+//     Console.WriteLine(sortedResults[i]);
+// }
+
+
+// self 1
+// List<int> numbers = [8, 3, 9, 1, 5];
+
+// numbers.Sort();
+// numbers.Reverse();
+
+// Console.WriteLine(string.Join(", ", numbers));
+
+
+// self 2
+// List<int> directionNumbers = [8, 3, 9, 1, 5];
+
+// SortByDirection(directionNumbers, true);
+
+// Console.WriteLine("Ascending order:");
+// Console.WriteLine(string.Join(", ", directionNumbers));
+
+// SortByDirection(directionNumbers, false);
+
+// Console.WriteLine("Descending order:");
+// Console.WriteLine(string.Join(", ", directionNumbers));
+
+
+// self 3
+int[] sizes = [10, 100, 1000];
+
+foreach (int size in sizes)
 {
-    Console.WriteLine("invalid number");
-    return;
-}
+    int[] testNumbers = new int[size];
 
-List<int> results = [];
-
-for (int i = 0; i < participants; i++)
-{
-    Console.Write($"result {i + 1}: ");
-
-    if (!int.TryParse(Console.ReadLine(), out int result))
+    for (int i = 0; i < size; i++)
     {
-        Console.WriteLine("invalid input");
-        return;
+        testNumbers[i] = (i * 37) % 101;
     }
 
-    results.Add(result);
+    BubbleSortWithCount(testNumbers, out int comparisons);
+
+    Console.WriteLine($"Array size: {size}, comparisons: {comparisons}");
 }
 
-List<int> sortedResults = new(results);
+// Array size: 10, comparisons: 45
+// Array size: 100, comparisons: 4950
+// Array size: 1000, comparisons: 499500
+// кол-во действий выросло +- в 100 раз
 
-sortedResults.Sort();
-
-Console.WriteLine("sorted results:");
-Console.WriteLine(string.Join(" ", sortedResults));
-
-Console.WriteLine("original results:");
-Console.WriteLine(string.Join(" ", results));
-
-Console.WriteLine($"best result: {sortedResults[sortedResults.Count - 1]}");
-Console.WriteLine($"worst result: {sortedResults[0]}");
-
-Console.WriteLine("top three results:");
-
-int start = sortedResults.Count - 3;
-
-if (start < 0)
-{
-    start = 0;
-}
-
-for (int i = sortedResults.Count - 1; i >= start; i--)
-{
-    Console.WriteLine(sortedResults[i]);
-}
 // sort
 
 // void BubbleSort(int[] numbers)
@@ -178,3 +225,33 @@ for (int i = sortedResults.Count - 1; i >= start; i--)
 //         numbers[j + 1] = current;
 //     }
 // }
+
+void BubbleSortWithCount(int[] numbers, out int comparisons)
+{
+    comparisons = 0;
+
+    for (int i = 0; i < numbers.Length - 1; i++)
+    {
+        for (int j = 0; j < numbers.Length - 1 - i; j++)
+        {
+            comparisons++;
+
+            if (numbers[j] > numbers[j + 1])
+            {
+                int temp = numbers[j];
+                numbers[j] = numbers[j + 1];
+                numbers[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void SortByDirection(List<int> numbers, bool ascending)
+{
+    numbers.Sort();
+
+    if (!ascending)
+    {
+        numbers.Reverse();
+    }
+}
